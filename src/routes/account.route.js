@@ -12,6 +12,20 @@ const accountController = require("../controllers/account.controller")
  */
 router.post('/' , authMiddleware.authMiddleware , accountController.createAccountController );
 
+/**
+ * - GET api/account
+ * - get all accounts of user
+ * - protected route
+ */
+router.get("/" , authMiddleware.authMiddleware , accountController.getAllUserAccounts);
+
+/**
+ * - GET api/account/balance/:accountId
+ * - fecth balance
+ * - protected route
+ */
+router.get("/balance/:accountId" , authMiddleware.authMiddleware , accountController.getAccountBalance);
+
 
 
 module.exports = router;

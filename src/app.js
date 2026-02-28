@@ -14,6 +14,7 @@ app.use(cookieparser());
  */
 const authRouter = require("./routes/auth.route");
 const accountRouter = require("./routes/account.route");
+const transactionRouter = require("./routes/transaction.route");
 
 
 /**
@@ -21,6 +22,7 @@ const accountRouter = require("./routes/account.route");
  */
 app.use("/api/auth" , authRouter);
 app.use("/api/account" , accountRouter);
+app.use("/api/transaction" , transactionRouter);
 
 
 

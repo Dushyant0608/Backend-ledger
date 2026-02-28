@@ -5,7 +5,7 @@ const ledgerModel = require("../models/ledger.model");
 const accountSchema = new mongoose.Schema({
     user : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : "user",
+        ref : "User",
         required : [true , "User is required to create a account"],
         index : true
     }, 
@@ -38,8 +38,8 @@ accountSchema.methods.getBalance = async function(){
                 totalDebit : {
                     $sum : {
                         $cond : [
-                            { $eq : ["$type" , "DEBIT"] },
-                            "$ammount",
+                            { $eq : ["$type" , "DEBITED"] },
+                            "$amount",
                             0
                         ]
                     }
@@ -47,7 +47,7 @@ accountSchema.methods.getBalance = async function(){
                 totalCredit  : {
                     $sum : {
                         $cond : [
-                            { $eq : ["$type" , "CREDIT"] },
+                            { $eq : ["$type" , "CREDITED"] },
                             "$amount",
                             0
                         ]
@@ -58,12 +58,12 @@ accountSchema.methods.getBalance = async function(){
         {
             $project : {
                 _id : 0,
-                balance : { $subtract : ["$totalDebit" , "$totalCredit"] }
+                balance : { $subtract : ["$totalCredit" , "$totalDebit"] }
             }
         }
     ])
 
-    if(!balanceData.length === 0){
+    if(balanceData.length === 0){
         return 0;
     }
 
