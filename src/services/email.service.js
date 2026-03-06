@@ -14,9 +14,13 @@ const transporter = nodemailer.createTransport({
 // Verify the connection configuration
 transporter.verify((error, success) => {
   if (error) {
-    console.error('Error connecting to email server:', error);
+    if (error.code === 'EAUTH') {
+      console.error('❌ OAuth token revoked or expired. Re-authorize the app and update REFRESH_TOKEN in .env');
+    } else {
+      console.error('Error connecting to email server:', error);
+    }
   } else {
-    console.log('Email server is ready to send messages');
+    console.log('✅ Email server is ready');
   }
 });
 

@@ -2,6 +2,7 @@ const express = require("express")
 
 const authMiddleware = require("../middleware/auth.middleware")
 const transactionController = require("../controllers/transaction.controller");
+const transactionRateLimiter = require("../middleware/transaction.Ratelimiter");
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ const router = express.Router();
  * - POST api/transaction/
  * - create transaction
  */
-router.post("/" , authMiddleware.authMiddleware , transactionController.createTransaction);
+router.post("/" , authMiddleware.authMiddleware , transactionRateLimiter , transactionController.createTransaction);
 
 /**
  * - POST api/transaction/system/initial-fund
