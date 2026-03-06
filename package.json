@@ -9,7 +9,9 @@
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.3",
-    "nodemailer": "^8.0.1"
+    "nodemailer": "^8.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "name": "backend-ledger",
   "version": "1.0.0",
