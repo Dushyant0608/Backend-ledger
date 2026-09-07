@@ -2,7 +2,7 @@ const { transactionLimiter } = require('../config/redis');
 
 const transactionRateLimiter = async (req, res, next) =>{
   try{
-    await transactionRateLimiter.consume(`txn-${req.user.id}`);
+    await transactionLimiter.consume(`txn-${req.user.id}`);
     next();
   }catch(err){
     return res.status(429).json({

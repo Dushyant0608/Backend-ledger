@@ -183,7 +183,8 @@ async function createTransaction (req , res ) {
     /**
      * 10. Send email notification
      */
-    await emailService.sendTransactionEmail(req.user.email, req.user.name, amount, toAccount);
+    emailService.sendTransactionEmail(req.user.email, req.user.name, amount, toAccount)
+        .catch(err => console.error("Non-critical: email notification failed", err));
 
     res.status(201).json({
         message: "Transaction completed successfully",
