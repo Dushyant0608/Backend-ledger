@@ -36,7 +36,7 @@ async function getAccountBalance(req,res){
             COALESCE(SUM(CASE WHEN type='CREDITED' THEN amount ELSE 0 END), 0) -
             COALESCE(SUM(CASE WHEN TYPE='DEBITED' THEN amount ELSE 0 END) , 0) AS balance
         FROM ledger_entries
-        WHERE accountId = ${accountId}
+        WHERE "accountId" = ${accountId}
     `;
 
     const balance = result[0].balance ?? 0;
